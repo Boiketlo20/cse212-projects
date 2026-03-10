@@ -1,3 +1,7 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.CompilerServices;
+
 public static class Arrays
 {
     /// <summary>
@@ -13,7 +17,18 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return []; // replace this return statement with your own
+        //Empty array that numbers will be stored in
+        double[] numbers = new double[length];
+        //This is a loop that will count from zero all the way to the length, which will give us the index,
+        //and based on that index, we can calculate our multiples.
+        for (int i = 0 ; i < numbers.Length ; i++)
+        {
+            numbers[i] = (i + 1) * number; //This gets the multiples by multiplying the index + 1 with the number
+            //(0+1) * 7 = 7
+            //(0+2) * 7 = 14
+        }
+
+        return numbers; // return array
     }
 
     /// <summary>
@@ -29,5 +44,17 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+        //We will use the slice method to get the values that will be rotated to the right
+        List<int> newList = data.GetRange(data.Count-amount, amount);
+        //Use slice method to get values that won't be rotated
+        List<int> oldList = data.GetRange(0, data.Count - amount);
+        //Start over to arrange list accordingly
+        data.Clear();
+        //Attach the new list
+        data.AddRange(newList);
+        //Attach the other end
+        data.AddRange(oldList);
+
     }
 }
