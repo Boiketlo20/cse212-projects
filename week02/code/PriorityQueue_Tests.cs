@@ -42,11 +42,11 @@ public class PriorityQueueTests
     public void TestPriorityQueue_3()
     {
         var priorityQueue = new PriorityQueue();
-        priorityQueue.Enqueue("Boikanyo", 3); 
         priorityQueue.Enqueue("Bonolo", 1);
-        priorityQueue.Enqueue("Boiketlo", 2);
         priorityQueue.Enqueue("Bontle", 3);
-       
+        priorityQueue.Enqueue("Boiketlo", 2);
+        priorityQueue.Enqueue("Boikanyo", 3); 
+        
         Assert.AreEqual("Bontle", priorityQueue.Dequeue());
         Assert.AreEqual("Boikanyo", priorityQueue.Dequeue());
     }
