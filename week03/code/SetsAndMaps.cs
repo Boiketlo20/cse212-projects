@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 
 public static class SetsAndMaps
@@ -22,7 +23,20 @@ public static class SetsAndMaps
     public static string[] FindPairs(string[] words)
     {
         // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+
+        var set = new HashSet<string>();
+        List<string> pairs = new();
+        foreach (var word in words)
+        {
+            string newWord = new string(word.Reverse().ToArray());
+            if (set.Contains(newWord))
+            {
+                pairs.Add($"{word} & {newWord}");
+            }   
+            set.Add(word);
+        }
+
+        return pairs.ToArray();
     }
 
     /// <summary>
