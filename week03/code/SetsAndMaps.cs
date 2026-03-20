@@ -87,7 +87,46 @@ public static class SetsAndMaps
     public static bool IsAnagram(string word1, string word2)
     {
         // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        if (word1.Length != word2.Length)
+        {
+            return false;
+        }
+
+        var words = new Dictionary<char, int>();
+        //var wordTwo= new Dictionary<char, int>();
+
+        foreach(var letter in word1.ToCharArray())
+        {
+            if (words.ContainsKey(letter))
+            {
+                words[letter]++;
+            }
+            else
+            {
+                words.Add(letter, 1);
+            }
+        }
+
+        foreach(var letter in word2.ToCharArray())
+        {
+            // Same ContainsKey logic, but DECREMENT
+            if (words.ContainsKey(letter))
+            {
+                words[letter]--;
+            }
+            else
+            {
+                return false;
+            }
+        }   
+
+        foreach(var kvp in words)
+        {
+            if (kvp.Value != 0) 
+            return false;
+        }
+        
+        return true;
     }
 
     /// <summary>
