@@ -87,45 +87,43 @@ public static class SetsAndMaps
     public static bool IsAnagram(string word1, string word2)
     {
         // TODO Problem 3 - ADD YOUR CODE HERE
+
+        word1 = new string(word1.Where(c => char.IsLetter(c)).Select(char.ToLowerInvariant).ToArray());
+        word2 = new string(word2.Where(c => char.IsLetter(c)).Select(char.ToLowerInvariant).ToArray());
+
         if (word1.Length != word2.Length)
         {
             return false;
         }
 
-        var words = new Dictionary<char, int>();
-        //var wordTwo= new Dictionary<char, int>();
+        var wordOne = new Dictionary<char, int>();
+        var wordTwo= new Dictionary<char, int>();
 
-        foreach(var letter in word1.ToCharArray())
+
+        foreach(var letter in word1)
         {
-            if (words.ContainsKey(letter))
-            {
-                words[letter]++;
-            }
+            if (wordOne.ContainsKey(letter))
+                wordOne[letter] ++;
             else
-            {
-                words.Add(letter, 1);
-            }
+                wordOne.Add(letter, 1);
         }
 
-        foreach(var letter in word2.ToCharArray())
-        {
-            // Same ContainsKey logic, but DECREMENT
-            if (words.ContainsKey(letter))
-            {
-                words[letter]--;
-            }
-            else
-            {
-                return false;
-            }
-        }   
 
-        foreach(var kvp in words)
+        foreach(var letter in word2)
         {
-            if (kvp.Value != 0) 
+            if (wordTwo.ContainsKey(letter))
+                wordTwo[letter] ++;
+            else
+                wordTwo.Add(letter, 1);
+        }
+
+
+        foreach(var kvp in wordOne)
+        {
+            if (!wordTwo.ContainsKey(kvp.Key) || wordTwo[kvp.Key] != kvp.Value)
             return false;
         }
-        
+
         return true;
     }
 
